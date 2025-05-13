@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --vis-font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+@layer base {
+  html {
+    @apply text-zinc-950;
+  }
+
+  :root {
+    --vis-font-family: 'Plus Jakarta Sans', sans-serif;
+    --vis-text-color: var(--color-zinc-400)
+  }
+}
+
