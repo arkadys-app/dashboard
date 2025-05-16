@@ -2,7 +2,19 @@ export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
 
   try {
-    const { data } = await supabase.from('games').select().eq('id', id).single()
+    const { data } = await supabase
+      .from('games')
+      .select(
+        `
+        *,
+        game_skills (
+          *,
+          skills (*)
+        )
+      `
+      )
+      .eq('id', id)
+      .single()
 
     return data
   } catch (error) {
