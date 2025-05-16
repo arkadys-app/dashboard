@@ -4,7 +4,7 @@ const items = [
     {
       name: 'Accueil',
       icon: 'ri:home-5-fill',
-      link: '/dashboard'
+      link: '/'
     },
     {
       name: 'Jeux',

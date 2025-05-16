@@ -14,6 +14,7 @@
 
   :root {
     --vis-font-family: 'Plus Jakarta Sans', sans-serif;
-    --vis-text-color: var(--color-zinc-400);
+    --vis-text-color: var(--color-zinc-400)
   }
 }
+
