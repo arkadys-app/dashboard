@@ -45,8 +45,7 @@
             >Hébergement</span
           >
           <p class="text-foreground">
-            Le site est hébergé par Netlify. [Ajouter une URL ou une adresse si
-            vous le souhaitez]
+            Le site est hébergé par Netlify.
           </p>
         </div>
         <div class="flex flex-col gap-2">
