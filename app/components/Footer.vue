@@ -4,7 +4,7 @@
       <div class="flex flex-col">
         <NuxtLink to="/" class="group/link">
           <NuxtImg
-            src="https://vnncfscpgbjplhvlxxdl.supabase.co/storage/v1/object/public/media/logo.png"
+            src="/images/logo.png"
             width="176"
             class="group-hover/link:scale-105 transition-transform duration-300"
           />

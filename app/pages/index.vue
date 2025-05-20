@@ -50,7 +50,7 @@ const accordionItems = [
 <template>
   <NuxtImg
     class="absolute top-0 left-0 right-0 w-full -z-1 min-h-screen object-cover"
-    src="https://vnncfscpgbjplhvlxxdl.supabase.co/storage/v1/object/public/media/header.png"
+    src="/images/header.png"
   />
   <div>
     <section class="py-6 min-h-[calc(100vh-6rem)]">
@@ -179,7 +179,7 @@ const accordionItems = [
             class="relative overflow-hidden rounded-lg"
           >
             <NuxtImg
-              src="https://vnncfscpgbjplhvlxxdl.supabase.co/storage/v1/object/public/media/capture-falling-apples.png"
+              src="/images/capture-falling-apples.png"
               class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
             />
           </AspectRatio>
@@ -200,7 +200,7 @@ const accordionItems = [
             class="relative overflow-hidden rounded-lg"
           >
             <NuxtImg
-              src="https://vnncfscpgbjplhvlxxdl.supabase.co/storage/v1/object/public/media/capture-cake-baking.png"
+              src="/images/capture-cake-baking.png"
               class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
             />
           </AspectRatio>
@@ -221,7 +221,7 @@ const accordionItems = [
             class="relative overflow-hidden rounded-lg"
           >
             <NuxtImg
-              src="https://vnncfscpgbjplhvlxxdl.supabase.co/storage/v1/object/public/media/capture-pirate-word.png"
+              src="/images/capture-pirate-word.png"
               class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
             />
           </AspectRatio>
