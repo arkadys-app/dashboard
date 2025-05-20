@@ -22,7 +22,7 @@
       <div ref="testimonialsRef" class="relative flex flex-col">
         <div class="w-full">
           <div
-            class="text-2xl font-semibold text-foreground before:content-['\201C'] after:content-['\201D'] dark:text-zinc-100"
+            class="text-2xl font-semibold text-foreground before:content-['\201C'] after:content-['\201D']"
           >
             Apprendre en s'amusant, c'est la meilleure façon de progresser.
           </div>
