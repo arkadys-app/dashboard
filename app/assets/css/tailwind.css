@@ -1,20 +1,30 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-sans: 'Outfit', sans-serif;
   --font-mono: 'DM Mono', monospace;
 
-  --vis-font-family: 'Plus Jakarta Sans', sans-serif;
-}
+  --color-background: #fffbeb;
+  --color-foreground: #1a3d39;
 
-@layer base {
-  html {
-    @apply text-zinc-950;
+  --animate-accordion-down: accordion-down 0.3s ease-out;
+  --animate-accordion-up: accordion-up 0.3s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--reka-accordion-content-height);
+    }
   }
 
-  :root {
-    --vis-font-family: 'Plus Jakarta Sans', sans-serif;
-    --vis-text-color: var(--color-zinc-400)
+  @keyframes accordion-up {
+    from {
+      height: var(--reka-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 }
-
