@@ -14,7 +14,7 @@ const filteredGames = computed(() => {
 
 <template>
   <div class="flex flex-col">
-    <form class="py-7">
+    <form class="mb-8">
       <SearchInput v-model="search" placeholder="Rechercher..." />
     </form>
     <div

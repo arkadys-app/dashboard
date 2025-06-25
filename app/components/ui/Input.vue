@@ -17,7 +17,7 @@ const props = defineProps<{
     :placeholder="props.placeholder"
     :class="
       cn(
-        'border-2 bg-zinc-50 rounded-xl font-semibold px-4 h-11 border-zinc-200 placeholder:text-zinc-400 focus:border-blue-400 outline-none',
+        'border rounded-full font-medium px-4 py-2 border-gray-200 focus:border-gray-300 text-sm placeholder:text-gray-400 shadow-sm transition-colors outline-none',
         props.class
       )
     "

@@ -19,7 +19,10 @@ const { data: game } = await useFetch(`/api/games/${useRoute().params.id}`)
       />
       <h1 class="text-xl font-bold">{{ game.name }}</h1>
     </div>
-    <p class="my-6">{{ game.description }}</p>
+    <div class="flex flex-col space-y-4">
+      <span class="font-medium">Description</span>
+      <p class="text-sm text-gray-600">{{ game.description }}</p>
+    </div>
     <ul class="flex space-x-2">
       <li
         v-for="skills of game.game_skills.map((gs: any) => gs.skills)"

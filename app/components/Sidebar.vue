@@ -3,17 +3,17 @@ const items = [
   [
     {
       name: 'Accueil',
-      icon: 'ri:home-5-fill',
-      link: '/dashboard'
+      icon: 'lucide:house',
+      link: '/'
     },
     {
       name: 'Jeux',
-      icon: 'ri:gamepad-fill',
+      icon: 'lucide:gamepad-2',
       link: '/games'
     },
     {
       name: 'Paramètres',
-      icon: 'ri:settings-2-fill',
+      icon: 'lucide:settings-2',
       link: '/settings'
     }
   ]
@@ -21,13 +21,13 @@ const items = [
 </script>
 
 <template>
-  <div class="flex flex-col w-64 px-4 border-r-2 border-r-zinc-200">
+  <div class="flex flex-col w-72 px-6 border-r border-r-zinc-200">
     <!-- Top -->
-    <div class="px-4 py-7">
+    <div class="px-4 py-12">
       <!-- Logo -->
       <div class="flex items-center gap-x-2">
-        <NuxtLink to="/" class="text-[28px] leading-11 font-black">
-          arkadys
+        <NuxtLink to="/">
+          <NuxtImg src="/logo.png" width="144" />
         </NuxtLink>
       </div>
     </div>
@@ -39,9 +39,9 @@ const items = [
             <li v-for="subitem of item">
               <NuxtLink
                 :to="subitem.link"
-                class="uppercase select-none flex items-center border-transparent gap-3 px-4 rounded-xl h-12 text-sm font-bold text-zinc-500 hover:bg-zinc-100 [&.router-link-active]:bg-blue-500 [&.router-link-active]:text-white"
+                class="select-none flex items-center border-transparent gap-3 px-4 rounded-full py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 [&.router-link-active]:bg-blue-500 [&.router-link-active]:text-white transition-colors"
               >
-                <Icon :name="subitem.icon" size="18" />
+                <Icon :name="subitem.icon" size="16" />
                 {{ subitem.name }}
               </NuxtLink>
             </li>
