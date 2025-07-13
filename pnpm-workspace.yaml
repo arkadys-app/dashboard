@@ -1,0 +1,9 @@
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - vue-demi
+
+onlyBuiltDependencies:
+  - sharp
+  - supabase
