@@ -214,30 +214,24 @@ export type Database = {
       word_lists: {
         Row: {
           created_at: string
-          description: string | null
           game_id: string
           id: string
-          is_public: boolean
           sound_name: string
           updated_at: string
           words: Json | null
         }
         Insert: {
           created_at?: string
-          description?: string | null
           game_id: string
           id?: string
-          is_public?: boolean
           sound_name: string
           updated_at?: string
           words?: Json | null
         }
         Update: {
           created_at?: string
-          description?: string | null
           game_id?: string
           id?: string
-          is_public?: boolean
           sound_name?: string
           updated_at?: string
           words?: Json | null

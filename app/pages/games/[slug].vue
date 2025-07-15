@@ -17,9 +17,7 @@ const { data: game } = await useAsyncData(`game-${params.slug}`, async () => {
     word_lists (
       id,
       sound_name,
-      description,
-      words,
-      is_public
+      words
     )
   `
     )
@@ -123,7 +121,7 @@ const saveSelections = async () => {
           <DialogTrigger as-child>
             <UiButton variant="primary" class="mt-auto">
               <Icon name="lucide:settings-2" class="mr-2" />
-              Customiser le jeu
+              Personnaliser le jeu
             </UiButton>
           </DialogTrigger>
           <DialogPortal>
@@ -132,7 +130,7 @@ const saveSelections = async () => {
               class="fixed top-1/2 left-1/2 max-h-[85vh] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-lg z-40"
             >
               <DialogTitle class="font-bold text-teal-800">
-                Customiser le jeu
+                Personnaliser le jeu
               </DialogTitle>
               <DialogDescription class="text-sm text-gray-600 mt-2.5">
                 Personnalisez les paramètres du jeu pour l'adapter à vos
@@ -140,7 +138,7 @@ const saveSelections = async () => {
               </DialogDescription>
               <CheckboxGroupRoot
                 v-model="selectedLists"
-                class="grid grid-cols-3 gap-3 mt-4"
+                class="grid grid-cols-3 gap-3 mt-4 overflow-auto max-h-96"
               >
                 <CheckboxRoot
                   as="div"
@@ -152,9 +150,9 @@ const saveSelections = async () => {
                   <CheckboxIndicator class="absolute top-2 right-2">
                     <Icon name="lucide:check" class="text-teal-800" />
                   </CheckboxIndicator>
-                  <span class="font-bold text-teal-800 text-sm"
-                    >Lettre {{ list.sound_name }}</span
-                  >
+                  <span class="font-bold text-teal-800 text-sm">
+                    {{ list.sound_name }}
+                  </span>
                   <ul class="text-xs pl-3 mt-1">
                     <li
                       v-for="(word, index) of (list.words as []).slice(0, 5)"

@@ -10,7 +10,7 @@ const { data: games } = await useAsyncData('games', async () => {
 const searchQuery = ref('')
 
 const filteredGames = computed(() => {
-  return games.value?.filter(game =>
+  return games.value?.filter((game) =>
     game.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 })
@@ -21,7 +21,7 @@ const filteredGames = computed(() => {
     <div class="flex flex-col md:flex-row md:items-end justify-between">
       <div class="py-3">
         <h1 class="text-teal-800 text-2xl font-bold">Jeux</h1>
-        <p class="text-gray-600">3 jeux</p>
+        <p class="text-gray-600">{{ filteredGames?.length }} jeux</p>
       </div>
     </div>
     <div class="mt-4">
@@ -34,7 +34,7 @@ const filteredGames = computed(() => {
     </div>
     <div class="grid grid-cols-4 gap-4 mt-4">
       <NuxtLink
-        v-for="game of (searchQuery.length > 0 ? filteredGames : games)"
+        v-for="game of searchQuery.length > 0 ? filteredGames : games"
         :key="game.id"
         :to="`/games/${game.slug}`"
       >
