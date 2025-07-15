@@ -20,7 +20,6 @@ const duration = ref<number>(0)
 const skill = ref<string>('Aucune')
 const favorite = ref<string>('Aucun')
 
-// Init depuis localStorage (client-only)
 onMounted(() => {
   const storedChildId = localStorage.getItem('childId')
   const fallback = children.value?.[0]
@@ -99,6 +98,9 @@ const setChildId = (childId: string) => {
       <UiCard class="flex flex-col pt-3 h-full">
         <h2 class="text-2xl font-bold text-teal-800">Performances</h2>
         <PerformanceChart v-if="selectedChildId" :child-id="selectedChildId" />
+        <p v-else class="text-gray-600 my-auto text-center">
+          Sélectionnez un enfant pour voir ses performances.
+        </p>
       </UiCard>
     </div>
   </div>

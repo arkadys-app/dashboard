@@ -37,7 +37,7 @@ const email = ref<string>(user.value?.email ?? '')
       <span class="text-sm text-gray-600 font-medium">Enfants</span>
     </div>
     <div class="px-4 py-2 mt-2 rounded-lg border border-gray-200">
-      <ul>
+      <ul v-if="!children || children.length > 0">
         <li v-for="child of children" :key="child.id" class="py-2">
           <div class="flex items-center justify-between">
             <div class="space-x-2">
@@ -57,6 +57,7 @@ const email = ref<string>(user.value?.email ?? '')
           </div>
         </li>
       </ul>
+      <p v-else class="text-gray-600 text-sm py-4">Aucun enfant ajouté.</p>
     </div>
   </div>
 </template>

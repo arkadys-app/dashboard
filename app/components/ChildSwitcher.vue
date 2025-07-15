@@ -49,9 +49,9 @@ const open = ref(false)
       >
         <div class="flex items-center gap-2">
           <Icon name="lucide:baby" />
-          {{ value }}
+          {{ value ?? 'Sélectionner un enfant' }}
         </div>
-        <Icon name="lucide:chevron-down" class="size-4" />
+        <Icon name="lucide:chevron-down" class="size-4 ml-2" />
       </DropdownMenuTrigger>
 
       <DropdownMenuPortal>
@@ -60,22 +60,30 @@ const open = ref(false)
           class="w-(--reka-dropdown-menu-trigger-width) p-1 bg-gray-50 rounded-lg border border-gray-200"
         >
           <DropdownMenuRadioGroup v-model="value">
-            <DropdownMenuRadioItem
-              v-for="(child, index) of props.children"
-              :key="index"
-              :value="child.firstname"
-              @select="emit('child-selected', child)"
-              class="flex items-center px-2 h-8 text-sm select-none text-teal-800 data-[highlighted]:bg-gray-100 rounded-md transition-colors"
-            >
-              <DropdownMenuItemIndicator
-                class="absolute flex items-center justify-center"
+            <template v-if="props.children.length > 0">
+              <DropdownMenuRadioItem
+                v-for="(child, index) of props.children"
+                :key="index"
+                :value="child.firstname"
+                @select="emit('child-selected', child)"
+                class="flex items-center px-2 h-8 text-sm select-none text-teal-800 data-[highlighted]:bg-gray-100 rounded-md transition-colors"
               >
-                <Icon name="lucide:check" size="16" class="text-teal-800" />
-              </DropdownMenuItemIndicator>
-              <span class="ml-[22px] font-medium">
-                {{ child.firstname }}
-              </span>
-            </DropdownMenuRadioItem>
+                <DropdownMenuItemIndicator
+                  class="absolute flex items-center justify-center"
+                >
+                  <Icon name="lucide:check" size="16" class="text-teal-800" />
+                </DropdownMenuItemIndicator>
+                <span class="ml-[22px] font-medium">
+                  {{ child.firstname }}
+                </span>
+              </DropdownMenuRadioItem>
+            </template>
+            <p
+              v-else
+              class="inline-flex items-center px-2 h-8 text-sm text-gray-600"
+            >
+              Aucun enfant trouvé
+            </p>
           </DropdownMenuRadioGroup>
           <DropdownMenuSeparator class="my-1 h-px -mx-1 bg-gray-200" />
           <DialogTrigger as-child>
