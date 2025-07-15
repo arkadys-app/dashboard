@@ -9,6 +9,18 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  app: {
+    head: {
+      htmlAttrs: { style: 'scroll-behavior: smooth' },
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/favicon.png'
+        }
+      ]
+    }
+  },
 
   modules: [
     '@nuxt/fonts',
