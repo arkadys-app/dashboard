@@ -17,7 +17,8 @@ const { data: game } = await useAsyncData(`game-${params.slug}`, async () => {
     word_lists (
       id,
       sound_name,
-      words
+      words,
+      in_game_id
     )
   `
     )
@@ -27,44 +28,44 @@ const { data: game } = await useAsyncData(`game-${params.slug}`, async () => {
   return data
 })
 
-const selectedLists = ref<string[]>([])
+const selectedInGameIds = ref<number[]>([])
 
 watchEffect(async () => {
   if (!game.value || !user.value) return
 
-  const allListIds = game.value.word_lists.map((list) => list.id)
+  const allInGameIds = game.value.word_lists
+  .map((l) => l.in_game_id)
+  .filter((id): id is number => id !== null)
 
-  const { data: userLists } = await supabase
-    .from('user_word_lists')
-    .select('word_list_id')
+  const { data: settings } = await supabase
+    .from('user_game_settings')
+    .select('in_game_word_list_id_ban')
     .eq('user_id', user.value.id)
+    .eq('game_id', game.value.id)
+    .maybeSingle()
 
-  selectedLists.value =
-    userLists!.length > 0
-      ? allListIds.filter(
-          (id) => !userLists!.map((l) => l.word_list_id).includes(id)
-        )
-      : allListIds
+  const banned = settings?.in_game_word_list_id_ban ?? []
+
+  selectedInGameIds.value = allInGameIds.filter((id) => !banned.includes(id))
 })
 
 const saveSelections = async () => {
   if (!game.value || !user.value) return
 
-  const allListIds = game.value.word_lists.map((l) => l.id)
-  const disabledListIds = allListIds.filter(
-    (id) => !selectedLists.value.includes(id)
-  )
+  const wordLists = game.value.word_lists
 
-  await supabase.from('user_word_lists').delete().eq('user_id', user.value.id)
+  const allInGameIds = wordLists.map((l) => l.in_game_id)
+  const bannedInGameIds = allInGameIds.filter((id) => !selectedInGameIds.value.includes(id))
+  const bannedWordListUUIDs = wordLists.filter((l) => bannedInGameIds.includes(l.in_game_id)).map((l) => l.id)
 
-  if (disabledListIds.length > 0) {
-    const inserts = disabledListIds.map((id) => ({
-      user_id: user.value!.id,
-      word_list_id: id
-    }))
-
-    await supabase.from('user_word_lists').insert(inserts)
-  }
+  const { error } = await supabase.from('user_game_settings').upsert({
+    user_id: user.value.id,
+    game_id: game.value.id,
+    in_game_word_list_id_ban: bannedInGameIds,
+    word_list_id_ban: bannedWordListUUIDs
+  }, {
+    onConflict: 'user_id,game_id'
+  })
 }
 </script>
 
@@ -137,14 +138,15 @@ const saveSelections = async () => {
                 besoins.
               </DialogDescription>
               <CheckboxGroupRoot
-                v-model="selectedLists"
+                v-if="!game || game.word_lists.length > 0"
+                v-model="selectedInGameIds"
                 class="grid grid-cols-3 gap-3 mt-4 overflow-auto max-h-96"
               >
                 <CheckboxRoot
                   as="div"
                   v-for="list of game?.word_lists"
-                  :key="list.id"
-                  :value="list.id"
+                  :key="list.in_game_id"
+                  :value="list.in_game_id"
                   class="relative cursor-pointer rounded-lg border border-gray-200 px-3 py-1.5 select-none hover:bg-gray-50 data-[state=checked]:bg-gray-100 transition-colors"
                 >
                   <CheckboxIndicator class="absolute top-2 right-2">
@@ -167,6 +169,12 @@ const saveSelections = async () => {
                   </ul>
                 </CheckboxRoot>
               </CheckboxGroupRoot>
+              <p
+                v-else
+                class="text-sm text-gray-600 mt-4 text-center italic"
+              >
+                Aucune liste de mots disponible pour ce jeu.
+              </p>
               <UiButton
                 variant="primary"
                 class="mt-4 w-full"
