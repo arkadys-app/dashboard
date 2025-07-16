@@ -14,6 +14,16 @@ const { data: children } = await useAsyncData('children', async () => {
 const firstname = ref<string>(user.value?.user_metadata?.firstname ?? '')
 const lastname = ref<string>(user.value?.user_metadata?.lastname ?? '')
 const email = ref<string>(user.value?.email ?? '')
+
+const onSubmit = async () => {
+  const { error } = await supabase.auth.updateUser({
+    email: email.value,
+    data: {
+      firstname: firstname.value,
+      lastname: lastname.value
+    }
+  })
+}
 </script>
 
 <template>
@@ -31,6 +41,13 @@ const email = ref<string>(user.value?.email ?? '')
       <UiInput v-model="firstname" placeholder="Prénom" class="w-full" />
       <UiInput v-model="lastname" placeholder="Nom de famille" class="w-full" />
       <UiInput v-model="email" placeholder="Adresse e-mail" class="w-full" />
+      <UiButton
+        @click="onSubmit()"
+        class="w-full mt-2"
+        variant="primary"
+      >
+        Mettre à jour
+      </UiButton>
     </div>
     <div class="flex items-center gap-2 mt-4">
       <Icon name="lucide:baby" size="16" class="text-gray-600" />
