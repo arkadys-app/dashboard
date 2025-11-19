@@ -16,6 +16,11 @@ const props = defineProps<{
   children: Child[]
 }>()
 
+const emit = defineEmits<{
+  'child-selected': [child: Child]
+  'child-created': []
+}>()
+
 const form = useForm({
   validationSchema: toTypedSchema(AddChildSchema),
   initialValues: {
@@ -31,12 +36,10 @@ const onSubmit = form.handleSubmit(async ({ firstname, birthdate }) => {
     user_id: user.value!.id
   })
 
+  emit('child-created')
+
   open.value = false
 })
-
-const emit = defineEmits<{
-  'child-selected': [child: Child]
-}>()
 
 const open = ref(false)
 </script>

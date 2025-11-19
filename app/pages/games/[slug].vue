@@ -2,6 +2,7 @@
 const { params } = useRoute()
 const supabase = useSupabaseClient<Database>()
 const user = useSupabaseUser()
+const { $toast } = useNuxtApp()
 
 const { data: game } = await useAsyncData(`game-${params.slug}`, async () => {
   const { data } = await supabase
@@ -66,6 +67,12 @@ const saveSelections = async () => {
   }, {
     onConflict: 'user_id,game_id'
   })
+
+  if (error) {
+    $toast.error(`Erreur lors de la sauvegarde de la personnalisation`)
+  } else {
+    $toast.success('Personnalisations sauvegardés avec succès !')
+  }
 }
 </script>
 
@@ -118,7 +125,7 @@ const saveSelections = async () => {
             </span>
           </div>
         </div>
-        <DialogRoot>
+        <DialogRoot v-slot="{ close }">
           <DialogTrigger as-child>
             <UiButton variant="primary" class="mt-auto">
               <Icon name="lucide:settings-2" class="mr-2" />
@@ -178,7 +185,10 @@ const saveSelections = async () => {
               <UiButton
                 variant="primary"
                 class="mt-4 w-full"
-                @click="saveSelections()"
+                @click="async () => {
+                  await saveSelections()
+                  close()
+                }"
               >
                 Enregistrer
               </UiButton>

@@ -2,7 +2,7 @@
 const user = useSupabaseUser()
 const supabase = useSupabaseClient<Database>()
 
-const { data: children } = await useAsyncData('children', async () => {
+const { data: children, refresh: refreshChildren } = await useAsyncData('children', async () => {
   const { data } = await supabase
     .from('children')
     .select('*')
@@ -82,6 +82,7 @@ const setChildId = (childId: string) => {
             v-model="selectedChildName"
             :children="children!"
             @child-selected="(child) => setChildId(child.id)"
+            @child-created="refreshChildren()"
           />
         </ClientOnly>
       </div>

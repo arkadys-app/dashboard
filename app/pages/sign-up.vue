@@ -5,6 +5,7 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+const { $toast } = useNuxtApp()
 
 watchEffect(() => {
   if (user.value) {
@@ -33,6 +34,10 @@ const onSubmit = form.handleSubmit(async (values) => {
       }
     }
   })
+
+  if (error) {
+    $toast.error(error.message)
+  }
 })
 </script>
 

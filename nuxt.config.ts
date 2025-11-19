@@ -30,7 +30,8 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@vee-validate/nuxt',
     'motion-v/nuxt',
-    'reka-ui/nuxt'
+    'reka-ui/nuxt',
+    'vue-sonner/nuxt'
   ],
 
   fonts: {
