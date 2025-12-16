@@ -1,0 +1,203 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String    @id
+  name                String
+  email               String
+  emailVerified       Boolean   @default(false)
+  image               String?
+  firstname           String?
+  lastname            String?
+
+  sessions            Session[]
+  accounts            Account[]
+  children            Child[]
+  wordLists           WordList[]
+  gameCustomizations  GameCustomization[]
+
+
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @default(now()) @updatedAt
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@map("verification")
+}
+
+model Child {
+  id          String    @id
+  firstname   String
+  birthdate   DateTime
+  parentId    String
+  parent      User      @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  gameSessions GameSession[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+
+  @@unique([parentId, firstname])
+  @@map("child")
+}
+
+model Game {
+  id                String        @id
+  slug              String
+  name              String
+  description       String?
+
+  sessions          GameSession[]
+  images            GameImage[]
+  skills            GameSkill[]
+  wordLists         WordList[]
+  customizations    GameCustomization[]
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @default(now()) @updatedAt
+
+  @@unique([slug])
+  @@map("game")
+}
+
+model GameSession {
+  id        String    @id
+  childId   String
+  child     Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+  gameId    String
+  game      Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  score     Int
+  duration  Int      // duration in seconds
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+
+  @@map("game_session")
+}
+
+model GameImage {
+  id        String    @id
+  gameId    String
+  game      Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  url       String
+  position  Int       @default(0)
+  alt       String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+
+  @@map("game_image")
+}
+
+model Skill {
+  id          String    @id
+  slug        String
+  name        String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  games       GameSkill[]
+
+  @@unique([slug])
+  @@map("skill")
+}
+
+model GameSkill {
+  gameId  String
+  skillId String
+
+  game    Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, skillId])
+  @@map("game_skill")
+}
+
+model WordList {
+  id                  String    @id
+  name                String
+  slug                String
+  description         String?
+  words               String[]
+  isGlobal            Boolean   @default(false)
+  gameId              String
+  game                Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  userId              String?
+  user                User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  userCustomizations  GameCustomization[]
+
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @default(now()) @updatedAt
+
+  @@unique([slug])
+  @@index([gameId])
+  @@map("word_list")
+}
+
+model GameCustomization {
+  userId      String
+  gameId      String
+  wordListId  String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game        Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  wordList    WordList  @relation(fields: [wordListId], references: [id], onDelete: Cascade)
+  isEnabled   Boolean   @default(true)
+
+  @@id([userId, gameId, wordListId])
+  @@map("game_customization")
+}
