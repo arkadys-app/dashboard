@@ -107,7 +107,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </div>
     <div class="flex-1 relative">
       <NuxtImg
-        src="https://images.pexels.com/photos/34649620/pexels-photo-34649620/free-photo-of-chat-roux-mignon-en-pull-jaune-assis-calmement.jpeg"
+        src="/images/sign-up.jpeg"
         class="absolute inset-0 w-full h-full object-cover rounded-xl"
       />
     </div>
