@@ -68,7 +68,7 @@ const NuxtLink = resolveComponent('NuxtLink')
           </UiBadge>
         </ul>
       </UiCard>
-      <div v-if="data" class="flex justify-between w-full">
+      <div v-if="data && !data.isGlobal" class="flex justify-between w-full">
         <div class="text-sm font-medium italic text-slate-500">
           Créé le
           <NuxtTime
@@ -81,7 +81,7 @@ const NuxtLink = resolveComponent('NuxtLink')
           />
         </div>
         <div
-          v-if="data.updatedAt !== data.createdAt"
+          v-if="data.updatedAt !== data.createdAt && !data.isGlobal"
           class="text-sm font-medium italic text-slate-500"
         >
           Modifié le
