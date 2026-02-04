@@ -148,7 +148,7 @@ const onCrosshairUpdate = computed(() => (d: ScoreData) => {
     </div>
     <div id="score-chart" class="pr-6">
       <VisXYContainer
-        v-if="props.data.length > 1"
+        v-if="props.data.length > 0"
         :data="data"
         :svg-defs="svgDefs"
         class="h-64 rounded"
