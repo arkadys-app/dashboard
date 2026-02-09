@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxt/image',
+    '@nuxt/test-utils/module',
     '@vueuse/nuxt',
     'motion-v/nuxt',
     'reka-ui/nuxt'
@@ -23,5 +24,10 @@ export default defineNuxtConfig({
   icon: {
     mode: 'svg',
     customCollections: [{ prefix: 'arkadys', dir: './app/assets/icons' }]
+  },
+  nitro: {
+    experimental: {
+      openAPI: true
+    }
   }
 })
