@@ -9,6 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint:fix": "prettier -w .",
+    "test": "vitest",
     "auth:schema": "better-auth generate --config server/utils/config.ts --output server/prisma/schema.prisma -y",
     "db:generate": "prisma generate --schema server/prisma/schema.prisma",
     "db:push": "prisma db push --schema server/prisma/schema.prisma"
@@ -50,9 +51,14 @@
     "@better-auth/cli": "^1.4.5",
     "@iconify-json/hugeicons": "^1.2.18",
     "@iconify-json/tabler": "^1.2.23",
+    "@nuxt/test-utils": "^4.0.0",
     "@types/node": "^24.10.0",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^20.5.3",
+    "playwright-core": "^1.58.2",
     "prettier": "^3.6.2",
     "prisma": "^6.19.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }
