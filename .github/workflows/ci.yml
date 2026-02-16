@@ -1,0 +1,68 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - next
+  pull_request:
+    branches:
+      - next
+
+env:
+  DATABASE_URL: postgresql://dummy:dummy@localhost:5432/db
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6.0.1
+      - uses: pnpm/action-setup@v4.2.0
+      - uses: actions/setup-node@v6.1.0
+        with:
+          node-version: lts/*
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+  lint:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6.0.1
+      - uses: pnpm/action-setup@v4.2.0
+      - uses: actions/setup-node@v6.1.0
+        with:
+          node-version: lts/*
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6.0.1
+      - uses: pnpm/action-setup@v4.2.0
+      - uses: actions/setup-node@v6.1.0
+        with:
+          node-version: lts/*
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests
+        run: pnpm test
