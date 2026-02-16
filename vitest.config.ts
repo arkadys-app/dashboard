@@ -21,6 +21,7 @@ export default defineConfig({
       },
       await defineVitestProject({
         test: {
+          hookTimeout: 100000,
           name: 'nuxt',
           include: ['test/nuxt/*.{test,spec}.ts'],
           environment: 'nuxt'

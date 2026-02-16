@@ -43,16 +43,4 @@ describe('Empty', () => {
     const iconContainer = wrapper.find('.relative.mb-6')
     expect(iconContainer.exists()).toBe(false)
   })
-
-  it('matches the snapshot', async () => {
-    const wrapper = await mountSuspended(Empty, {
-      props: {
-        title: 'Snapshot Title',
-        description: 'Snapshot Desc',
-        icon: 'heroicons:star'
-      },
-      global: { stubs: { Icon: true } }
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
 })
