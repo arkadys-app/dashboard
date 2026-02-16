@@ -9,7 +9,9 @@ describe('getErrorMessage', () => {
 
   it('should return the correct error message for USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL', () => {
     const result = getErrorMessage('USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL')
-    expect(result).toBe("L'utilisateur existe déjà, utilisez une autre adresse e-mail.")
+    expect(result).toBe(
+      "L'utilisateur existe déjà, utilisez une autre adresse e-mail."
+    )
   })
 
   it('should return the correct error message for INVALID_PASSWORD', () => {

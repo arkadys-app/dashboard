@@ -7,8 +7,9 @@ describe('cn utility function', () => {
   })
 
   it('should handle conditional classes with objects', () => {
-    expect(cn('base-class', { 'active': true, 'disabled': false }))
-      .toBe('base-class active')
+    expect(cn('base-class', { active: true, disabled: false })).toBe(
+      'base-class active'
+    )
   })
 
   it('should merge conflicting Tailwind classes correctly', () => {
@@ -16,13 +17,15 @@ describe('cn utility function', () => {
   })
 
   it('should handle arrays of classes', () => {
-    expect(cn(['text-sm', 'font-bold'], 'text-center'))
-      .toBe('text-sm font-bold text-center')
+    expect(cn(['text-sm', 'font-bold'], 'text-center')).toBe(
+      'text-sm font-bold text-center'
+    )
   })
 
   it('should filter out falsy values', () => {
-    expect(cn('text-red-500', false, null, undefined, 'bg-blue-500'))
-      .toBe('text-red-500 bg-blue-500')
+    expect(cn('text-red-500', false, null, undefined, 'bg-blue-500')).toBe(
+      'text-red-500 bg-blue-500'
+    )
   })
 
   it('should handle empty input', () => {
@@ -30,7 +33,8 @@ describe('cn utility function', () => {
   })
 
   it('should handle complex Tailwind merge scenarios', () => {
-    expect(cn('bg-red-500 hover:bg-blue-500', 'bg-green-500'))
-      .toBe('hover:bg-blue-500 bg-green-500')
+    expect(cn('bg-red-500 hover:bg-blue-500', 'bg-green-500')).toBe(
+      'hover:bg-blue-500 bg-green-500'
+    )
   })
 })

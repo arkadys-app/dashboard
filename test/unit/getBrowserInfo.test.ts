@@ -42,12 +42,22 @@ describe('getBrowserInfo', () => {
 
   it('should handle all supported browsers', () => {
     const browsers = [
-      'Chrome', 'Chromium', 'Safari', 'Firefox', 'Edge',
-      'Opera', 'Brave', 'Vivaldi', 'DuckDuckGo Browser',
-      'Android Browser', 'Mobile Chrome', 'Mobile Firefox', 'Mobile Safari'
+      'Chrome',
+      'Chromium',
+      'Safari',
+      'Firefox',
+      'Edge',
+      'Opera',
+      'Brave',
+      'Vivaldi',
+      'DuckDuckGo Browser',
+      'Android Browser',
+      'Mobile Chrome',
+      'Mobile Firefox',
+      'Mobile Safari'
     ]
 
-    browsers.forEach(browser => {
+    browsers.forEach((browser) => {
       const result = getBrowserInfo(browser)
       expect(result).not.toBeNull()
       expect(result).toHaveProperty('icon')

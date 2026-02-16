@@ -14,7 +14,7 @@ describe('formatDuration function', () => {
       expect(formatDuration(0)).toBe('0 min')
     })
 
-    it('should handle seconds that don\'t divide evenly into minutes', () => {
+    it("should handle seconds that don't divide evenly into minutes", () => {
       expect(formatDuration(90)).toBe('1 min')
       expect(formatDuration(150)).toBe('2 min')
       expect(formatDuration(3599)).toBe('59 min')

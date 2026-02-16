@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "lint": "prettier -c .",
     "lint:fix": "prettier -w .",
     "test": "vitest run",
     "auth:schema": "better-auth generate --config server/utils/config.ts --output server/prisma/schema.prisma -y",
