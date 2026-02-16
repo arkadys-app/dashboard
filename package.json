@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint:fix": "prettier -w .",
-    "test": "vitest",
+    "test": "vitest run",
     "auth:schema": "better-auth generate --config server/utils/config.ts --output server/prisma/schema.prisma -y",
     "db:generate": "prisma generate --schema server/prisma/schema.prisma",
     "db:push": "prisma db push --schema server/prisma/schema.prisma"
@@ -53,6 +53,7 @@
     "@iconify-json/tabler": "^1.2.23",
     "@nuxt/test-utils": "^4.0.0",
     "@types/node": "^24.10.0",
+    "@vitest/coverage-v8": "4.0.18",
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^20.5.3",
     "playwright-core": "^1.58.2",
