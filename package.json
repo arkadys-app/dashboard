@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare",
     "lint:fix": "prettier -w .",
     "test": "vitest run",
-    "test:e2e": "vitest run test/e2e",
     "auth:schema": "better-auth generate --config server/utils/config.ts --output server/prisma/schema.prisma -y",
     "db:generate": "prisma generate --schema server/prisma/schema.prisma",
     "db:push": "prisma db push --schema server/prisma/schema.prisma"
