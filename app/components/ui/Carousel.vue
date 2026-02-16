@@ -15,11 +15,10 @@ export type CarouselItem =
       [key: string]: any
     }
 
-interface CarouselProps<T extends CarouselItem = CarouselItem>
-  extends Omit<
-    EmblaOptionsType,
-    'axis' | 'container' | 'slides' | 'direction'
-  > {
+interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<
+  EmblaOptionsType,
+  'axis' | 'container' | 'slides' | 'direction'
+> {
   as?: any
   items: T[]
   autoplay?: boolean | AutoplayOptionsType

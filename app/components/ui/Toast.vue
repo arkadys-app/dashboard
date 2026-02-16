@@ -7,8 +7,10 @@ import type { ToastRootEmits, ToastRootProps } from 'reka-ui'
 
 import type { ButtonProps } from './Button.vue'
 
-export interface ToastProps
-  extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
+export interface ToastProps extends Pick<
+  ToastRootProps,
+  'defaultOpen' | 'open' | 'type' | 'duration'
+> {
   as?: any
   variant?: VariantProps<typeof toastVariants>['variant']
   title?: string
