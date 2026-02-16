@@ -5,11 +5,10 @@ import { useForwardPropsEmits } from 'reka-ui'
 import type { VariantProps } from 'class-variance-authority'
 import type { ProgressRootEmits, ProgressRootProps } from 'reka-ui'
 
-export interface ProgressProps
-  extends Pick<
-    ProgressRootProps,
-    'getValueLabel' | 'getValueText' | 'modelValue'
-  > {
+export interface ProgressProps extends Pick<
+  ProgressRootProps,
+  'getValueLabel' | 'getValueText' | 'modelValue'
+> {
   as?: any
   variant?: VariantProps<typeof progressVariants>['variant']
   max?: number

@@ -3,11 +3,10 @@ import { useForwardProps } from 'reka-ui'
 
 import type { CheckboxRootProps } from 'reka-ui'
 
-interface CheckboxProps
-  extends Pick<
-    CheckboxRootProps,
-    'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'
-  > {
+interface CheckboxProps extends Pick<
+  CheckboxRootProps,
+  'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'
+> {
   label?: string
   icon?: string
   class?: any
